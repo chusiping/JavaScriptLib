@@ -44,6 +44,22 @@ Date.prototype.Format = function (fmt) {
     return fmt;
 }
 
+//对象是否为空
+function isEmpty(ObjVal){
+if ((ObjVal==null || typeof(ObjVal)=="undefined")|| (typeof(ObjVal)=="string"&&ObjVal==""&&ObjVal!="undefined")){
+        return true;
+     }else{
+         return false;
+     }
+}
 
-
-
+//股票处理类
+//转带前缀的sh00154，sz600545
+const MyStock = {
+    toShSz(code)
+    {
+        var _code = 'sz'+ code;
+        if(code.substring(0, 1) == '6')  _code = 'sh' + code;            
+        return _code;
+    }
+}

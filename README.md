@@ -13,12 +13,32 @@ console.log((new Date()).Format("yyyyMMddhhmm"));
 
 ## Lib_Browse.js方法列表  
 
-写入浏览器的cookie
+写入浏览器的cookie  
 MyCookie.setCookie("mydata","2022-3-19 11:16","10s");
 console.log(MyCookie.getCookie("mydata"));  
 
+对象是否为空  
+var a;  
+console.log(isEmpty(a));  
 
 
+//股票处理类  
+//转带前缀的sh00154，sz600545  
+console.log(MyStock.toShSz('600123'));   
+
+
+//自动生成table表格  
+var myList = [  
+   { "name": "abc",  "age": 50 ,  "hobby": "打麻将"},  
+   { "name": "李四", "age": "25", "hobby": "swimming" },  
+   { "name": "王五", "age": "13", "hobby": "dak" },  
+   { "name": "赵六", "age": "44", "hobby": "smoke" },  
+   { "name": "张七", "age": "21", "hobby": "sleep" },  
+   { "name": "xyz",  "age": "18", "hobby": "programming" }  ];  
+// var par = { "列名":"auto" , "数据组": myList , "表ID" : "tableMSA" , "隐藏列":"", "列顺序":"","合并显示":"false","  合并主键":"code" };  
+myTable.par["列名"] = "a,b,c";  
+var html =  myTable.get_html_table(myList);  
+$('#app').html(html);  
 
 
 ## 参考网文
