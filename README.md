@@ -11,6 +11,15 @@ console.log((new Date()).Format("yyyyMMddhhmm"));
 打印结果 202205071722  
 
 
+## Lib_Browse.js方法列表  
+
+写入浏览器的cookie
+MyCookie.setCookie("mydata","2022-3-19 11:16","10s");
+console.log(MyCookie.getCookie("mydata"));  
+
+
+
+
 
 ## 参考网文
 
