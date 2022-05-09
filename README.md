@@ -1,4 +1,4 @@
-## 方法列表
+## Lib_CommonJs.js方法列表
 
 按指定字符截断  
 console.log("33:".rtrim(':'));       打印结果 33  
