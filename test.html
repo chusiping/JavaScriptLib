@@ -10,7 +10,11 @@
 </head>
 <body>
 
+
+<input id="key" type="text" style="width: 500px" value="key1001"><br><br>
+<input id="common"  type="submit" value="测试">
 <div id="app"></div>
+
 
 <script language="JavaScript"> 
     /******************************* 文档载入 ************************************/
@@ -51,6 +55,11 @@
     myTable.par["列名"] = "a,b,c";
     var html =  myTable.get_html_table(myList);  
     $('#app').html(html);  
+
+    //写入和读取local Storege
+    console.log(MyCookie.save_input("#key","testData"));
+    console.log(MyCookie.ReadStorage("#key","testData"))   
+
 
   });
 

@@ -36,7 +36,49 @@ const MyCookie = {
      { 
          return str1*24*60*60*1000; 
      } 
-  }  
+  },
+  //读取 [{"key_datalist":"aa1"},{"key_datalist":"aa2"}]
+  ReadStorage(ControlName,DateListName){
+      if(!window.localStorage){
+          alert("浏览器支持localstorage");
+          return null;
+      }else
+      {
+          var storage=window.localStorage;
+          var json=storage.getItem(DateListName);
+          var jsonObj=JSON.parse(json);
+          console.log(typeof jsonObj);
+          if(jsonObj==null) return []; //若干地产以
+          return jsonObj;
+      }
+  },
+  //调用：save_input("#key","keyWord");
+  //写入结果：数组类型子串 [{"keyWord":"aa1"},{"keyWord":"aa2"}]
+  save_input(ControlName,DateListName,Clear)
+  {
+      var storage=window.localStorage;
+      //参数为clear，就清除全部
+      if(Clear == "clear") storage.setItem(DateListName,""); 
+      if(!window.localStorage){
+          alert("浏览器支持localstorage");
+      }else
+      {
+          var vl =  $(ControlName).val(); 
+          if(vl == "") return;
+          var newob = {}; newob[DateListName] = vl ;
+          
+          var hisObject = this.ReadStorage(ControlName,DateListName);
+          for(var i=0;i<hisObject.length;i++){
+              for(var key in hisObject[i]){
+                  if(key == DateListName && hisObject[i][key] == vl ) return;
+              }
+          };
+          //数组追加对象
+          hisObject.push(newob);
+          var d = JSON.stringify(hisObject);
+          storage.setItem(DateListName,d);
+      }
+  }
 };
 
  
@@ -178,3 +220,5 @@ const myTable ={
       return s;　　
   }
 }
+
+
