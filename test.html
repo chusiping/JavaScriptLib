@@ -9,7 +9,9 @@
     <script src="Lib_CommonJs.js" type="text/javascript"></script>
 </head>
 <body>
-
+<div id="dv3">
+    <iFrame src="https://q.stock.sohu.com/" scrolling="no"></iFrame>
+</div> 
 
 <input id="key" type="text" style="width: 500px" value="key1001"><br><br>
 <input id="common"  type="submit" value="测试">
@@ -60,6 +62,13 @@
     console.log(MyCookie.save_input("#key","testData"));
     console.log(MyCookie.ReadStorage("#key","testData"))   
 
+    // 显示页面局部信息iframe
+    myIframe.div["width"] = "220px";
+    myIframe.div["height"] = "320px";
+    myIframe.div["scrolling"] = "no";
+    myIframe.frame["margin-left"] = "-20px";
+    myIframe.frame["margin-top"] = "-200px";
+    myIframe.SetDiv("#dv3");
 
   });
 

@@ -1,3 +1,21 @@
+  
+// 显示页面局部信息iframe
+// myIframe.div["width"] = "220px";
+// myIframe.div["height"] = "320px";
+// myIframe.div["scrolling"] = "no";
+// myIframe.frame["margin-left"] = "-20px";
+// myIframe.frame["margin-top"] = "-200px";
+// myIframe.SetDiv("#dv3");
+const myIframe ={
+    div :   { "width":"1020px","height":"180px","overflow":"auto","border":"1px" , "display": "inline-block","border": "solid 1px" ,"vertical-align":"top"},
+    frame : { "width":"1200px" ,"height":"1500px", "margin-left":"-200px","margin-top":"-360px", "border": "solid 1px","scrolling":"no"},
+    SetDiv(CtrName){  
+        $(CtrName).css(this.div);
+        $(CtrName).find("iframe").css(this.frame);  
+    }
+};
+
+
 // 写入浏览器的cookie
 // MyCookie.setCookie("mydata","2022-3-19 11:16","10s");
 // console.log(MyCookie.getCookie("mydata")); 
