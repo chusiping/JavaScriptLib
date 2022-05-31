@@ -1,4 +1,4 @@
-## Lib_CommonJs.js方法列表
+## libc.js方法列表
 
 + 按指定字符截断  
 ```javascript
@@ -14,7 +14,7 @@ console.log((new Date()).Format("yyyyMMddhhmm"));
 打印结果 202205071722  
 ```
 
-## Lib_Browse.js方法列表  
+## libb.js方法列表  
 
 + 写入浏览器的cookie  
 ```javascript

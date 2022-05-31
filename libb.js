@@ -239,4 +239,85 @@ const myTable ={
   }
 }
 
+ //2022-5-31 14:20 调佣方法
+    // JsontoTable.data = data.list;
+    // JsontoTable.para.列名 = ["a","b"]  未实现
+    // JsontoTable.para.隐藏列 = ["日期","序号"] 未实现
+    // JsontoTable.setDivHtml("#mydiv2");
+    let JsontoTable = {
+        data : [{"序号":"1","信息ID":"1001","信息内容":"xxx超速","日期":"2022-5-15","接受对象":"张三","类型":"app","所属单位":"佛山项目"},{"序号":"2","信息ID":"1002","信息内容":"xxx违规打电话","日期":"2022-5-16","接受对象":"李四","类型":"钉钉","所属单位":"资产部"},{"序号":"3","信息ID":"1003","信息内容":"xxx超速","日期":"2022-5-17","接受对象":"张三","类型":"微信","所属单位":"信息化部"},{"序号":"4","信息ID":"1004","信息内容":"xxx违规打电话","日期":"2022-5-18","接受对象":"李四","类型":"app","所属单位":"佛山项目"},{"序号":"5","信息ID":"1005","信息内容":"xxx超速","日期":"2022-5-19","接受对象":"张三","类型":"钉钉","所属单位":"资产部"},{"序号":"6","信息ID":"1006","信息内容":"xxx违规打电话","日期":"2022-5-20","接受对象":"李四","类型":"微信","所属单位":"信息化部"},{"序号":"7","信息ID":"1007","信息内容":"xxx超速","日期":"2022-5-21","接受对象":"张三","类型":"app","所属单位":"佛山项目"}],
+        para :{ "列名":[], "表ID" : "" , "隐藏列": [], "列顺序":"","合并显示":'false',"合并主键":"code" },
+        setDivHtml:function(divTag) {
+            let str = this.get_html_table();
+            $(divTag).html(str);
+            // console.log(this.data);
+            // console.log(JSON.stringify(this.para));
+            
+        },
+        forArr: (obj,type)=>{ //循环对象的属性值
+            let rt = [];
+            for (var key in obj){
+                if(type=="1") //value
+                    rt.push(obj[key]);
+                else
+                    rt.push(key); //key
+            }
+            return rt;
+        },
+        displayNone:(arr,key)=>{ //没有用到,保留吧
+            if(arr.includes(key))
+                return ` style="display:none";`;
+            else
+                return "";
+        },
+        get_html_table: function () {
+            lieList = this.para["列名"];
+            date_list = this.data;
+            tb_id = this.para["表ID"]; //id="tableMSM"
+            hide_col = this.para["隐藏列"];//用逗号隔开
+            orderStr = this.para["列顺序"];//拟定列的顺序,以逗号隔开
+            IsSpan = this.para["合并显示"];
+            Span_mk = this.para["合并主键"]
+
+            let template = `<table id="_id_"> _th_ _tr_ </table> `;
+            let thArr = this.forArr(date_list[0],0); //data里的数组head
+            let table_Arrth = lieList.length > 0 ? lieList : thArr;
+
+            let table_th = table_Arrth.map(x=> `\n\t<td>${x}</td>`);
+
+            let table_trs = date_list.map(x => {
+                let rt = this.forArr(x,1);   // 取出每个tr对象
+                let rt_hide = this.forArr(x,0);   
+                let Arr_tdStr = rt.map( x=> `\n\t<td>${x}</td>` );  // td加到数组
+                let td_str =Arr_tdStr.join("");
+                let tr = `\n<tr>${td_str}</tr>\n`;
+                return tr;
+            } );
+            let rt = template.replace("_id_",tb_id).replace("_th_",table_th.join("")).replace("_tr_",table_trs.join(""));
+            return rt ;    
+        }
+    }
+//给table添加编辑删除按钮
+//$(document).ready(function () {
+//  myButton.AddTableBtn('#app div table');
+// });
+let myButton =  {
+    btn : function(sname,sty) {
+        return `<button type="button" class="btn  btn-xs ${sty}">${sname}</button> `;
+    },
+    AddTableBtn : function (Tabel_Tag) {
+        var table = Tabel_Tag; 
+        $(table).attr("class","table  table-bordered table-hover");
+        var trList = $(table).find("tr");
+        for (var i=0;i<trList.length;i++) {
+            var tr = trList[i];
+            if(i==0){
+                $(tr).append("<td>操作</td>");
+            }else{
+                $(tr).append('<td>'+  this.btn('详情','btn-warning') + this.btn('编辑','btn-primary') + this.btn('删除','btn-danger')+'</td>' );
+            }
+        };
+    }
+}
+
 
